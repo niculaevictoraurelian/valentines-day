@@ -9,16 +9,16 @@ const ValentineQuestion = ({ onAnswer }) => {
   const handleNoClick = () => {
     const newClicks = noClicks + 1;
     setNoClicks(newClicks);
-    // Increase yes button size exponentially
-    setYesScale(1 + newClicks * 0.5);
+    // Increase yes button size gradually (slower growth for mobile)
+    setYesScale(1 + newClicks * 0.25);
   };
 
   const handleYesClick = () => {
     onAnswer('Da');
   };
 
-  // Calculate if yes button should cover the screen
-  const isYesGiant = yesScale > 3;
+  // Calculate if yes button should cover the screen (takes more clicks now)
+  const isYesGiant = yesScale > 2;
 
   return (
     <motion.div
@@ -104,9 +104,9 @@ const ValentineQuestion = ({ onAnswer }) => {
             <motion.button
               onClick={handleNoClick}
               animate={{
-                scale: Math.max(0.3, 1 - noClicks * 0.15),
+                scale: Math.max(0.3, 1 - noClicks * 0.1),
                 opacity: Math.max(0.3, 1 - noClicks * 0.1),
-                x: noClicks * 30
+                x: noClicks * 15
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               className="btn btn-outline btn-error gap-2 px-8"
