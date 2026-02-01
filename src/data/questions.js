@@ -21,6 +21,7 @@ export const QUESTIONS = [
     id: 1,
     question: "Începem ușor, în ce dată am devenit oficial un cuplu? 💕",
     type: "text",
+    inputType: "date", // Enables date mask input (DD/MM/YYYY)
     answer: "09/06/2024", // ← CHANGE THIS to your anniversary date
     hint: "Format: ZZ/LL/AAAA"
   },
@@ -46,19 +47,6 @@ export const QUESTIONS = [
   },
   {
     id: 4,
-    question: "Chiar mă iubești? 🥺",
-    type: "radio",
-    options: [
-      "Da",
-      "Da",
-      "Da",
-      "Da"
-    ],
-    answer: "Da", // ← CHANGE THIS to the correct answer
-    hint: "Asta e ușoară... sau nu? 😏"
-  },
-  {
-    id: 5,
     question: "Care este lucrul pe care îl fac și te enervează cel mai tare? 😅",
     type: "radio",
     options: [
@@ -69,6 +57,19 @@ export const QUESTIONS = [
     ],
     answer: "Las becul aprins", // ← CHANGE THIS to the correct answer
     hint: "Ceva legat de... lumină? 💡"
+  },
+  {
+    id: 5,
+    question: "Chiar mă iubești? 🥺",
+    type: "radio",
+    options: [
+      "Da",
+      "Da",
+      "Da",
+      "Da"
+    ],
+    answer: "Da", // ← CHANGE THIS to the correct answer
+    hint: "Asta e ușoară... sau nu? 😏"
   },
   {
     id: 6,

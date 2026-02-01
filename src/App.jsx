@@ -17,6 +17,20 @@ const STORAGE_KEYS = {
   QUIZ_STARTED: 'valentine_quiz_started'
 };
 
+// Normalize text: remove diacritics and convert to lowercase
+const normalizeText = (text) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritical marks
+    .replace(/ă/g, 'a')
+    .replace(/â/g, 'a')
+    .replace(/î/g, 'i')
+    .replace(/ș/g, 's')
+    .replace(/ț/g, 't');
+};
+
 function App() {
   // App state
   const [gameState, setGameState] = useState('loading'); // loading, intro, quiz, lockout, success
@@ -94,7 +108,7 @@ function App() {
     }
     
     const isCorrect = currentQuestion.type === 'text'
-      ? answer.toLowerCase().trim() === currentQuestion.answer.toLowerCase().trim()
+      ? normalizeText(answer) === normalizeText(currentQuestion.answer)
       : answer === currentQuestion.answer;
 
     if (isCorrect) {

@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, HelpCircle, Send, ChevronRight } from 'lucide-react';
+import { IMaskInput } from 'react-imask';
 
 const QuizCard = ({ question, onAnswer, isLast }) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [textAnswer, setTextAnswer] = useState('');
   const [showHint, setShowHint] = useState(false);
+
+  // Check if this is a date input question
+  const isDateInput = question.inputType === 'date';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,14 +100,28 @@ const QuizCard = ({ question, onAnswer, isLast }) => {
           >
             <div className="form-control">
               <div className="relative">
-                <input
-                  type="text"
-                  value={textAnswer}
-                  onChange={(e) => setTextAnswer(e.target.value)}
-                  placeholder="Scrie răspunsul tău aici..."
-                  className="input input-bordered input-primary w-full pr-12 text-lg"
-                  autoComplete="off"
-                />
+                {isDateInput ? (
+                  // Date input with mask DD/MM/YYYY
+                  <IMaskInput
+                    mask="00/00/0000"
+                    value={textAnswer}
+                    unmask={false}
+                    onAccept={(value) => setTextAnswer(value)}
+                    placeholder="ZZ/LL/AAAA"
+                    className="input input-bordered input-primary w-full pr-12 text-lg"
+                    autoComplete="off"
+                  />
+                ) : (
+                  // Regular text input
+                  <input
+                    type="text"
+                    value={textAnswer}
+                    onChange={(e) => setTextAnswer(e.target.value)}
+                    placeholder="Scrie răspunsul tău aici..."
+                    className="input input-bordered input-primary w-full pr-12 text-lg"
+                    autoComplete="off"
+                  />
+                )}
                 {textAnswer && (
                   <motion.div
                     initial={{ scale: 0 }}
@@ -115,8 +133,11 @@ const QuizCard = ({ question, onAnswer, isLast }) => {
                 )}
               </div>
               <label className="label">
-                <span className="label-text-alt text-base-content/60">
-                  Nu-ți face griji, nu contează literele mari/mici 😉
+                <span className="label-text-alt text-base-content/60 pt-2">
+                  {isDateInput 
+                    ? "Doar scrie numerele, slash-urile apar automat! 📅" 
+                    : "Nu-ți face griji, nu contează literele mari/mici 😉"
+                  }
                 </span>
               </label>
             </div>
