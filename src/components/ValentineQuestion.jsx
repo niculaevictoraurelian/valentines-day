@@ -18,7 +18,7 @@ const ValentineQuestion = ({ onAnswer }) => {
   };
 
   // Calculate if yes button should cover the screen
-  const isYesGiant = yesScale > 5;
+  const isYesGiant = yesScale > 3;
 
   return (
     <motion.div
@@ -99,15 +99,14 @@ const ValentineQuestion = ({ onAnswer }) => {
             Da! 💕
           </motion.button>
 
-          {/* No Button - Gets smaller and runs away */}
+          {/* No Button - Gets smaller and moves right as Yes grows */}
           {!isYesGiant && (
             <motion.button
               onClick={handleNoClick}
               animate={{
                 scale: Math.max(0.3, 1 - noClicks * 0.15),
-                x: noClicks > 0 ? (Math.random() - 0.5) * 100 : 0,
-                y: noClicks > 0 ? (Math.random() - 0.5) * 50 : 0,
-                opacity: Math.max(0.3, 1 - noClicks * 0.1)
+                opacity: Math.max(0.3, 1 - noClicks * 0.1),
+                x: noClicks * 30
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               className="btn btn-outline btn-error gap-2 px-8"
