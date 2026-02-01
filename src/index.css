@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: valentine --default, retro;
+}
+
+/* Custom romantic styling */
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .romantic-gradient {
+    @apply bg-gradient-to-r from-pink-400 via-rose-400 to-red-400;
+  }
+  
+  .heart-pulse {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
